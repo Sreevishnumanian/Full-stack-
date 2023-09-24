@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+
+  <style>
+
+body {
+  background-image: url('https://static.vecteezy.com/system/resources/previews/011/171/111/original/white-background-with-orange-geometric-free-vector.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .todo-container {
+      border-radius: 12px;
+      box-shadow: 5px 5px 8px blue, 10px 10px 8px red, 15px 15px 8px green;
+      overflow: hidden;
+    }
+    .todo-header {
+      padding: 20px;
+      background-color: #fffff;
+      text-align: ;    
+    }
+
+    .todo-header h2 {
+      margin: 0;
+    }
+
+    .todo-form {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .todo-form input[type="text"],
+    .todo-form input[type="datetime-local"] {
+      flex-grow: 1;
+      padding: 10px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .todo-form button {
+      background-color: #009688;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.2s ease;
+    }
+
+    .todo-form button:hover {
+      background-color: #00796b;
+    }
+
+    .task {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .task:last-child {
+      border-bottom: none;
+    }
+
+    .task.completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .delete-btn {
+      background-color: #d32f2f;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.2s ease;
+    }
+
+    .delete-btn:hover {
+      background-color: #c62828;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="todo-container">
+    <div class="todo-header">
+      <h2>Todo List</h2>
+    </div>
+    <div class="todo-form">
+      <input type="text" id="new-task" placeholder="New task..." required>
+      <input type="datetime-local" id="task-due-date">
+      <button id="add-btn">Add</button>
+<a href="login.html">Log out</a>
+    </div>
+    <div id="task-list">
+    </div>
+  </div>
+
+  <script>
+    const newTaskInput = document.getElementById('new-task');
+    const dueDateInput = document.getElementById('task-due-date');
+    const taskList = document.getElementById('task-list');
+    const addBtn = document.getElementById('add-btn');
+    function createTaskItem(taskText, dueDate) {
+      const taskItem = document.createElement('div');
+      taskItem.classList.add('task');
+      taskItem.dataset.dueDate = dueDate.toISOString();
+
+      const taskCheckbox = document.createElement('input');
+      taskCheckbox.type = 'checkbox';
+
+      const taskTextElement = document.createElement('span');
+      taskTextElement.textContent = taskText;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.classList.add('delete-btn');
+      deleteBtn.addEventListener('click', function () {
+        taskItem.remove();
+      });
+
+      taskItem.appendChild(taskCheckbox);
+      taskItem.appendChild(taskTextElement);
+      taskItem.appendChild(deleteBtn);
+      taskCheckbox.addEventListener('change', function () {
+        if (taskCheckbox.checked) {
+          taskItem.classList.add('completed');
+        } else {
+          taskItem.classList.remove('completed');
+        }
+      });
+
+      return taskItem;
+    }
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const taskText = newTaskInput.value.trim();
+      const dueDate = new Date(dueDateInput.value);
+      if (taskText === '' || isNaN(dueDate)) {
+        return;
+      }
+
+      const taskItem = createTaskItem(taskText, dueDate);
+      taskList.appendChild(taskItem);
+      newTaskInput.value = '';
+      dueDateInput.value = '';
+    }
+    addBtn.addEventListener('click', handleFormSubmit);
+ function checkReminders() {
+      const taskItems = document.querySelectorAll('.task');
+      const now = Date.now();
+      taskItems.forEach(taskItem => {
+        const dueDate = parseInt(taskItem.dataset.dueDate); 
+        if (dueDate <= now) {
+          const taskText = taskItem.querySelector('span').textContent;
+          window.alert(`Reminder: Task "${taskText}" is due now!`);
+        }
+      });
+    }
+    setInterval(checkReminders,60000);
+
+  </script>
+</body>
+
+</html>
