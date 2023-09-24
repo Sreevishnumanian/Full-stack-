@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blogging App</title>
+  <style>
+body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://e0.pxfuel.com/wallpapers/647/572/desktop-wallpaper-tree-mist-fantastic-and-mobile-background-spirit-tree.jpg'); /* Replace with your image URL */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      color: grey;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #postForm {
+      box-shadow: 10px 10px;
+      background-color: white;
+      background-size: cover;
+      padding: 20px;
+      border-radius: 15px 50px 30px;
+      
+    }
+    label {
+      font-weight: bold;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      resize: vertical;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .message {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .message p {
+      margin: 0;
+    }
+    .message img {
+      max-width: 100%;
+      margin-top: 10px;
+    }
+    .post-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .download-link {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .like-button {
+      background-color: #eb0909;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      color: white;
+    }
+    .like-button:hover {
+      background-color: #080808;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <h1>Blogging App</h1>
+    
+    <form id="postForm">
+      <div class="form-group">
+        <label for="message">Write your message:</label>
+        <textarea id="message" class="form-control" rows="4" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="image">Upload an image:</label>
+        <input type="file" id="image" class="form-control-file">
+      </div>
+      <button type="submit">Post</button>
+    </form>
+    
+    <div id="messageContainer">
+      <!-- Messages will be displayed here -->
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('postForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const message = document.getElementById('message').value;
+      const image = document.getElementById('image').files[0];
+
+      if (message || image) {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'message';
+        messageElement.innerHTML = `
+          <p>${message}</p>
+          ${image ? `
+            <img src="${URL.createObjectURL(image)}" alt="Posted Image" />
+          ` : ''}
+          <div class="post-buttons">
+            ${image ? `<a href="${URL.createObjectURL(image)}" class="download-link" download>Download</a>` : ''}
+            <button class="like-button">Like <span class="like-count">0</span></button>
+            <button class="comment-button">Comment</button> <!-- Added comment button -->
+          </div>
+        `;
+        document.getElementById('messageContainer').appendChild(messageElement);
+
+        document.getElementById('message').value = '';
+        document.getElementById('image').value = '';
+      }
+    });
+
+    document.getElementById('messageContainer').addEventListener('click', function (e) {
+      if (e.target && e.target.classList.contains('like-button')) {
+        const likeButton = e.target;
+        const likeCount = likeButton.querySelector('.like-count');
+
+        let currentLikes = parseInt(likeCount.textContent);
+        currentLikes = isNaN(currentLikes) ? 0 : currentLikes;
+        likeCount.textContent = currentLikes + 1;
+      }
+
+      if (e.target && e.target.classList.contains('comment-button')) {
+        const commentButton = e.target;
+        const postButtons = commentButton.parentElement;
+      
+        const commentForm = document.createElement('form');
+        commentForm.className = 'comment-form';
+        commentForm.innerHTML = `
+          <div class="form-group">
+            <label for="comment">Write your comment:</label>
+            <textarea class="comment-textarea" rows="3" required></textarea>
+          </div>
+          <button type="submit">Post Comment</button>
+        `;
+      
+        const existingCommentForms = document.querySelectorAll('.comment-form');
+        existingCommentForms.forEach(form => form.remove());
+      
+        postButtons.appendChild(commentForm);
+
+        commentForm.addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          const commentTextarea = commentForm.querySelector('.comment-textarea');
+          const comment = commentTextarea.value;
+
+          if (comment) {
+            const commentElement = document.createElement('div');
+            commentElement.className = 'comment';
+            commentElement.innerHTML = `
+              <p>${comment}</p>
+            `;
+
+            const messageContainer = commentForm.closest('.message');
+            messageContainer.appendChild(commentElement);
+
+            commentTextarea.value = '';
+
+            commentForm.remove();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
