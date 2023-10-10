@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+	<link type="text/css" rel="stylesheet" href="st.css">
+	<link type="text/css" rel="stylesheet" href="se.css">
+
+	<title>AdminHub</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">project manager</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="index.html">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<!-- <li>
+				<a href="#">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">My Store</span>
+				</a>
+			</li> -->
+			<li>
+				<a href="ana.html">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Analytics</span>
+				</a>
+			</li>
+			<li>
+				<a href="mess.html">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+			<li>
+				<a href="team.html">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Team</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="login.html" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="pro.html" class="profile">
+				<img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<!-- <a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download PDF</span>
+				</a> -->
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-calendar-check' ></i>
+					<span class="text">
+						<h3>5</h3>
+						<p>New project</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>3</h3>
+						<p>ongoing</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-dollar-circle' ></i>
+					<span class="text">
+						<h3>1</h3>
+						<p>completed</p>
+					</span>
+				</li>
+			</ul>
+			
+            <div class="table-data">
+				<div class="order">
+					<div class="head">
+				<table>
+					<tr>
+						<td>
+							<form autocomplete="off" onsubmit="onFormSubmit()">
+								<div>
+									<label for="productCode">Project Code</label>
+									<input type="text" name="productCode" id="productCode">
+								</div>
+								<div>
+									<label for="product">Project Name</label>
+									<input type="text" name="product" id="product">
+								</div>
+								<div>
+									<label for="qty">number of team member</label>
+									<input type="number" name="qty" id="qty">
+								</div>
+								<div>
+									<!-- <label for="perPrice">Price</label>
+									<input type="number" name="perPrice" id="perPrice"> -->
+									<label for="perPrice">Choose a status:</label>
+                                    <select name="perPrice" id="perPrice">
+                                         <option value="Approve">Approve</option>
+                                         <option value="Inprogress">Inprogress</option>
+                                         <option value="decline">decline</option>
+                                         
+								</div>
+	
+			
+								<div class="form_action--button">
+									<input type="submit" value="Submit">
+									<input type="reset" value="Reset">
+								</div>
+							</form>
+			
+							<td>
+								<table class="list" id="storeList">
+									<thead>
+										<tr>
+											<th>Project Code</th>
+											<th>Project Name</th>
+											<th>number of team menbers</th>
+											<th>status</th>
+										</tr>
+									</thead>
+									<tbody>
+			
+									</tbody>
+								</table>
+							</td>
+						</td>
+					</tr>
+				</table>
+				<script type="text/javascript" src="./scr.js"></script>
+</div>
+			
+				
+			<!-- <div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Recent Orders</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Date Order</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<img src="img/people.png">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/people.png">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/people.png">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status process">Process</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/people.png">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status pending">Pending</span></td>
+							</tr>
+							<tr>
+								<td>
+									<img src="img/people.png">
+									<p>John Doe</p>
+								</td>
+								<td>01-10-2021</td>
+								<td><span class="status completed">Completed</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>-->
+				<!-- <div class="todo">
+					<div class="head">
+						<h3>Todos</h3>
+						<i class='bx bx-plus' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<ul class="todo-list">
+						<li class="completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="not-completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+						<li class="not-completed">
+							<p>Todo List</p>
+							<i class='bx bx-dots-vertical-rounded' ></i>
+						</li>
+					</ul>
+				</div> -->
+				<div class="todo-container">
+					<div class="todo-header">
+					  <h2>Todo List</h2>
+					</div>
+					<div class="todo-form">
+					  <input type="text" id="new-task" placeholder="New task..." required>
+					  <input type="datetime-local" id="task-due-date">
+					  <button id="add-btn">Add</button>
+				
+					</div>
+					<div id="task-list">
+					</div>
+				  </div>
+				  
+  <script>
+    const newTaskInput = document.getElementById('new-task');
+    const dueDateInput = document.getElementById('task-due-date');
+    const taskList = document.getElementById('task-list');
+    const addBtn = document.getElementById('add-btn');
+    function createTaskItem(taskText, dueDate) {
+      const taskItem = document.createElement('div');
+      taskItem.classList.add('task');
+      taskItem.dataset.dueDate = dueDate.toISOString();
+
+      const taskCheckbox = document.createElement('input');
+      taskCheckbox.type = 'checkbox';
+
+      const taskTextElement = document.createElement('span');
+      taskTextElement.textContent = taskText;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Delete';
+      deleteBtn.classList.add('delete-btn');
+      deleteBtn.addEventListener('click', function () {
+        taskItem.remove();
+      });
+
+      taskItem.appendChild(taskCheckbox);
+      taskItem.appendChild(taskTextElement);
+      taskItem.appendChild(deleteBtn);
+      taskCheckbox.addEventListener('change', function () {
+        if (taskCheckbox.checked) {
+          taskItem.classList.add('completed');
+        } else {
+          taskItem.classList.remove('completed');
+        }
+      });
+
+      return taskItem;
+    }
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const taskText = newTaskInput.value.trim();
+      const dueDate = new Date(dueDateInput.value);
+      if (taskText === '' || isNaN(dueDate)) {
+        return;
+      }
+
+      const taskItem = createTaskItem(taskText, dueDate);
+      taskList.appendChild(taskItem);
+      newTaskInput.value = '';
+      dueDateInput.value = '';
+    }
+    addBtn.addEventListener('click', handleFormSubmit);
+ function checkReminders() {
+      const taskItems = document.querySelectorAll('.task');
+      const now = Date.now();
+      taskItems.forEach(taskItem => {
+        const dueDate = parseInt(taskItem.dataset.dueDate); 
+        if (dueDate <= now) {
+          const taskText = taskItem.querySelector('span').textContent;
+          window.alert(`Reminder: Task "${taskText}" is due now!`);
+        }
+      });
+    }
+    setInterval(checkReminders,60000);
+
+  </script>
+			
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+</div></div></div>
+	<script src="script.js"></script>
+</body>
+</html>
