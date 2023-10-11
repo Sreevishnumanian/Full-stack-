@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Question Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .question-container {
+            margin: 20px 0;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="radio"] {
+            margin: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Question Survey</h1>
+        <p>answer any 5 of them</p>
+        <div class="question-container">
+            <div class="question" id="question">Loading...</div>
+            <div class="choices" id="choices"></div>
+        </div>
+        <button id="next-button">Next Question</button>
+    
+        <form id="next-button" action="thank.html">
+        <input type="submit" id="submit" value="Submit">
+    </form>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What programming languages are you currently learning?",
+                choices: ["C++", "PYTHON", "RUBY", "JAVA"]
+            },
+            {
+                question: "How do you primarily learn programming?",
+                choices: ["Coding bootcamps", " University", "Online courses","Others"]
+            },
+            {
+                question: "What type of coding projects are you most interested in?",
+                choices: ["Web development", "App development", "Data science and analytics", "others"]
+            },
+            {
+                question: "What online coding platforms do you find most useful for learning? ",
+                choices: ["Codecademy", "Github", "Coursera", "others"]
+            },
+            {
+                question: "What coding environments or IDEs do you prefer to use?",
+                choices: ["Visual Studio Code", "pycharm", "Sublime Text", "Jupyter Notebook"]
+            },
+            {
+                question: "Have you participated in any coding competitions or hackathons?",
+                choices: ["Yes, regularly", "Yes, occasionally", "No, but I'm interested", "No, and I'm not interested"]
+            }
+        ];
+
+        const questionElement = document.getElementById("question");
+        const choicesElement = document.getElementById("choices");
+        const nextButton = document.getElementById("next-button");
+        let currentQuestionIndex = -1;
+
+        function displayNextQuestion() {
+            currentQuestionIndex = Math.floor(Math.random() * questions.length);
+            const currentQuestion = questions[currentQuestionIndex];
+            questionElement.textContent = currentQuestion.question;
+            choicesElement.innerHTML = "";
+
+            currentQuestion.choices.forEach((choice, index) => {
+                const choiceInput = document.createElement("input");
+                choiceInput.type = "radio";
+                choiceInput.id = `choice${index}`;
+                choiceInput.name = "userChoice";
+                choiceInput.value = choice;
+
+                const choiceLabel = document.createElement("label");
+                choiceLabel.textContent = choice;
+                choiceLabel.setAttribute("for", `choice${index}`);
+
+                choicesElement.appendChild(choiceInput);
+                choicesElement.appendChild(choiceLabel);
+                choicesElement.appendChild(document.createElement("br"));
+            });
+        }
+
+        nextButton.addEventListener("click", displayNextQuestion);
+
+        // Display the first random question when the page loads
+        displayNextQuestion();
+    </script>
+</body>
+</html>
